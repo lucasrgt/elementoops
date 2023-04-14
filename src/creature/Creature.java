@@ -6,6 +6,9 @@ import creature.attack.PhysicalAttack;
 import creature.characteristics.Characteristics;
 import element.Element;
 
+/**
+ * Modelo de classe para as criaturas elementais.
+ */
 public abstract class Creature {
     private String name;
     private Element element;
@@ -24,6 +27,7 @@ public abstract class Creature {
 
     /**
      * Retorna uma lista de criaturas inimigas para combater baseado no elemento da criatura do jogador.
+     * @return Creature[]
      */
     public abstract Creature[] getEnemiesCreatures();
 
@@ -46,7 +50,7 @@ public abstract class Creature {
     }
 
     /**
-     * Recebimento de um ataque físico e reduz a vitalidade da criatura.
+     * Recebe um ataque físico e reduz a vitalidade.
      */
     public void receivePhysicalDamage(Creature enemyCreature) {
         int enemyAttackDamage = new PhysicalAttack(enemyCreature.getCharacteristics()).castAttack();

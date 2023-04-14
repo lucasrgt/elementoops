@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Algumas utilidades de console que são usadas ao longo do jogo.
  */
-public class Console {
+public class ConsoleUtils {
     /**
      * Aguarda um determinado tempo antes de executar a próxima ação.
      * @param milliseconds Tempo em milisegundos

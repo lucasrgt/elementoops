@@ -11,7 +11,6 @@ public class Earth extends Element {
         super(NAME, PORTUGUESE_NAME, CONSOLE_COLOR_CODE);
     }
 
-
     @Override
     public double getResistanceFactor(Element element) {
         switch (element.getName()) {
