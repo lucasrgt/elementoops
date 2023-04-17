@@ -42,17 +42,20 @@ public class ConsoleCreatureHandler {
             int choice = scanner.nextInt();
 
             switch (choice) {
-                case 1:
+                case 1 -> {
                     return new AirCreature();
-                case 2:
+                }
+                case 2 -> {
                     return new EarthCreature();
-                case 3:
+                }
+                case 3 -> {
                     return new FireCreature();
-                case 4:
+                }
+                case 4 -> {
                     return new WaterCreature();
-                default:
-                    System.out.println(ConsoleColors.RED + "\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 4.\n" + ConsoleColors.RESET);
-                    break;
+                }
+                default ->
+                        System.out.println(ConsoleColors.RED + "\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 4.\n" + ConsoleColors.RESET);
             }
         }
     }
@@ -61,13 +64,17 @@ public class ConsoleCreatureHandler {
      * Implementação da lógica de quem começa a jogar primeiro (jogador ou computador) baseado na velocidade das criaturas.
      * A criatura com mais velocidade será aquela que jogará primeiro.
      */
-    public void getFirstAttack(Creature playerSelectedCreature, Creature enemyCreature) {
+    public Creature getFirstAttack(Creature playerSelectedCreature, Creature enemyCreature) {
         if (playerSelectedCreature.getCharacteristics().getSpeed() > enemyCreature.getCharacteristics().getSpeed()) {
             System.out.println("[ " + ConsoleColors.GREEN + "COMBATE" + ConsoleColors.RESET + " ] " + "SUA CRIATURA É MAIS RÁPIDA, VOCÊ JOGA PRIMEIRO!\n");
             selectAttack(playerSelectedCreature, enemyCreature);
+
+            return playerSelectedCreature;
         } else {
             System.out.println("[ " + ConsoleColors.RED + "COMBATE" + ConsoleColors.RESET + " ] " + "INFELIZMENTE A CRIATURA INIMIGA É MAIS RÁPIDA, ELA JOGA PRIMEIRO!\n");
             enemyAttack(playerSelectedCreature, enemyCreature);
+
+            return enemyCreature;
         }
     }
 
@@ -88,22 +95,19 @@ public class ConsoleCreatureHandler {
             int choice = scanner.nextInt();
 
             switch (choice) {
-                case 1:
+                case 1 -> {
                     System.out.println(ConsoleColors.GREEN + "\nVOCÊ REALIZA UM ATAQUE FÍSICO!" + ConsoleColors.RESET);
                     enemyCreature.receivePhysicalDamage(playerCreature);
                     attackSelected = true;
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     System.out.println(ConsoleColors.GREEN + "\nVOCÊ REALIZA UM ATAQUE ELEMENTAL!" + ConsoleColors.RESET);
                     enemyCreature.receiveElementalDamage(playerCreature);
                     attackSelected = true;
-                    break;
-                case 3:
-                    ConsoleUtils.stop();
-                    break;
-                default:
-                    System.out.println(ConsoleColors.RED + "\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 3.\n" + ConsoleColors.RESET);
-                    break;
+                }
+                case 3 -> ConsoleUtils.stop(scanner);
+                default ->
+                        System.out.println(ConsoleColors.RED + "\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 3.\n" + ConsoleColors.RESET);
             }
         }
     }

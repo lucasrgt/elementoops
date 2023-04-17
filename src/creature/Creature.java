@@ -73,7 +73,7 @@ public abstract class Creature {
     public void receiveElementalDamage(Creature enemyCreature) {
         Element enemyElement = enemyCreature.getElement();
 
-        int enemyAttackDamage = new ElementalAttack(enemyCreature.getCharacteristics(), enemyElement).castAttack();
+        int enemyAttackDamage = new ElementalAttack(enemyCreature.getCharacteristics()).castAttack();
 
         System.out.println("\n" +
                 "| " + enemyElement.getConsoleColorCode() + enemyCreature.getName() + ConsoleColors.RESET + " REALIZA UM ATAQUE ELEMENTAL!\n" +

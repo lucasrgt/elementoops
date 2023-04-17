@@ -30,26 +30,23 @@ public class GameConsole {
 
             System.out.print("\n- SELECIONE UMA OPÇÃO ( 1 - 2 ): ");
 
-            Scanner scanner = new Scanner(System.in);
-
             int choice = scanner.nextInt();
             boolean selected = false;
 
             while (!selected) {
                 switch (choice) {
-                    case 1:
+                    case 1 -> {
                         System.out.println("\nIniciando torneio...\n");
                         tournament.createTournament(playerCreature);
                         selected = true;
-                        break;
-                    case 2:
-                        ConsoleUtils.stop();
+                    }
+                    case 2 -> {
+                        ConsoleUtils.stop(scanner);
                         selected = true;
                         restartGame = true;
-                        break;
-                    default:
-                        System.out.println(ConsoleColors.RED + "\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 3.\n" + ConsoleColors.RESET);
-                        break;
+                    }
+                    default ->
+                            System.out.println(ConsoleColors.RED + "\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 3.\n" + ConsoleColors.RESET);
                 }
             }
         } while (restartGame);

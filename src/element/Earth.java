@@ -13,16 +13,11 @@ public class Earth extends Element {
 
     @Override
     public double getResistanceFactor(Element element) {
-        switch (element.getName()) {
-            case "Air":
-                return 2.0;
-            case "Water":
-            case "Fire":
-                return 1.0;
-            case "Earth":
-                return 0.5;
-            default:
-                return 0;
-        }
+        return switch (element.getName()) {
+            case "Air" -> 2.0;
+            case "Water", "Fire" -> 1.0;
+            case "Earth" -> 0.5;
+            default -> 0;
+        };
     }
 }

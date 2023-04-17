@@ -27,25 +27,31 @@ public class ConsoleTournament {
 
             enemyCreature.showCreatedCreatureMessage();
 
-            creatureHandler.getFirstAttack(playerSelectedCreature, enemyCreature);
+            Creature lastAttacker = creatureHandler.getFirstAttack(playerSelectedCreature, enemyCreature);
 
             while (true) {
-                creatureHandler.selectAttack(playerSelectedCreature, enemyCreature);
+                if (lastAttacker != playerSelectedCreature) {
+                    creatureHandler.selectAttack(playerSelectedCreature, enemyCreature);
 
-                System.out.println(ConsoleColors.RED + "VIDA DO INIMIGO AGORA: " + enemyCreatureCharacteristics.getVitality() + "\n" + ConsoleColors.RESET);
+                    System.out.println(ConsoleColors.RED + "VIDA DO INIMIGO AGORA: " + enemyCreatureCharacteristics.getVitality() + "\n" + ConsoleColors.RESET);
 
-                if (enemyCreatureCharacteristics.getVitality() <= 0) {
-                    System.out.println(ConsoleColors.GREEN + "VOCÊ DERROTOU O INIMIGO!\n" + ConsoleColors.RESET);
-                    playerSelectedCreature.regenerateVitality();
-                    ConsoleUtils.sleep(3000);
-                    break;
-                }
+                    if (enemyCreatureCharacteristics.getVitality() <= 0) {
+                        System.out.println(ConsoleColors.GREEN + "VOCÊ DERROTOU O INIMIGO!\n" + ConsoleColors.RESET);
+                        playerSelectedCreature.regenerateVitality();
+                        ConsoleUtils.sleep(3000);
+                        break;
+                    }
 
-                creatureHandler.enemyAttack(playerSelectedCreature, enemyCreature);
+                    lastAttacker = playerSelectedCreature;
+                } else {
+                    creatureHandler.enemyAttack(playerSelectedCreature, enemyCreature);
 
-                if (playerSelectedCreatureCharacteristics.getVitality() <= 0) {
-                    System.out.println(ConsoleColors.RED + "--- GAME OVER - VOCÊ FOI DERROTADO ---");
-                    System.exit(0);
+                    if (playerSelectedCreatureCharacteristics.getVitality() <= 0) {
+                        System.out.println(ConsoleColors.RED + "--- GAME OVER - VOCÊ FOI DERROTADO ---");
+                        System.exit(0);
+                    }
+
+                    lastAttacker = enemyCreature;
                 }
             }
         }

@@ -13,16 +13,11 @@ public class Air extends Element {
 
     @Override
     public double getResistanceFactor(Element element) {
-        switch (element.getName()) {
-            case "Fire":
-                return 2.0;
-            case "Water":
-            case "Earth":
-                return 1.0;
-            case "Air":
-                return 0.5;
-            default:
-                return 0;
-        }
+        return switch (element.getName()) {
+            case "Fire" -> 2.0;
+            case "Water", "Earth" -> 1.0;
+            case "Air" -> 0.5;
+            default -> 0;
+        };
     }
 }

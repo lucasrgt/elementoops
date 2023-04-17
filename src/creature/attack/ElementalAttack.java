@@ -1,17 +1,13 @@
 package creature.attack;
 
 import creature.characteristics.Characteristics;
-import element.Element;
 
 /**
  * Ataque elemental.
  */
 public class ElementalAttack extends Attack {
-    private Element element;
-
-    public ElementalAttack(Characteristics characteristics, Element element) {
+    public ElementalAttack(Characteristics characteristics) {
         super(characteristics);
-        this.element = element;
     }
 
     @Override
