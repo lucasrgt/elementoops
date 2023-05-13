@@ -3,12 +3,10 @@ package element;
 public abstract class Element {
     private final String name;
     private final String portugueseName;
-    private final String consoleColorCode;
 
-    public Element(String name, String portugueseName, String consoleColorCode) {
+    public Element(String name, String portugueseName) {
         this.name = name;
         this.portugueseName = portugueseName;
-        this.consoleColorCode = consoleColorCode;
     }
 
     /**
@@ -21,8 +19,5 @@ public abstract class Element {
     }
     public String getPortugueseName() {
         return portugueseName;
-    }
-    public String getConsoleColorCode() {
-        return consoleColorCode;
     }
 }

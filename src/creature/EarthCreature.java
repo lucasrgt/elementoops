@@ -1,10 +1,8 @@
 package creature;
 
-import console.ConsoleColors;
 import creature.characteristics.Characteristics;
 import element.Earth;
 import element.Element;
-import element.Fire;
 
 public class EarthCreature extends Creature {
     private static final String NAME = "StoneDev";
@@ -18,9 +16,9 @@ public class EarthCreature extends Creature {
     public void showCreatedCreatureMessage() {
         System.out.println(
                 "\n" +
-                "| Um " + ELEMENT.getConsoleColorCode() +  NAME + ConsoleColors.RESET + " brota do solo com as seguintes características:"
+                "| Um " +  NAME + " brota do solo com as seguintes características:"
         );
-        super.getCreatedCreatureCharacteristics();
+        super.getCreatedCreatureCharacteristicsMessage();
     }
 
     @Override

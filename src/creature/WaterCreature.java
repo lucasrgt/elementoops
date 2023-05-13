@@ -1,6 +1,5 @@
 package creature;
 
-import console.ConsoleColors;
 import creature.characteristics.Characteristics;
 import element.Element;
 import element.Water;
@@ -18,9 +17,9 @@ public class WaterCreature extends Creature {
     public void showCreatedCreatureMessage() {
         System.out.println(
                 "\n" +
-                "| Um " + ELEMENT.getConsoleColorCode() +  NAME + ConsoleColors.RESET + " flui graciosamente da correnteza com as seguintes características:"
+                "| Um " +  NAME + " flui graciosamente da correnteza com as seguintes características:"
         );
-        super.getCreatedCreatureCharacteristics();
+        super.getCreatedCreatureCharacteristicsMessage();
     }
 
     @Override

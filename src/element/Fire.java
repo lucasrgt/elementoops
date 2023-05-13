@@ -1,14 +1,11 @@
 package element;
 
-import console.ConsoleColors;
-
 public class Fire extends Element {
     private static final String NAME = "Fire";
     private static final String PORTUGUESE_NAME = "Fogo";
-    public static final String CONSOLE_COLOR_CODE = ConsoleColors.RED;
 
     public Fire() {
-        super(NAME, PORTUGUESE_NAME, CONSOLE_COLOR_CODE);
+        super(NAME, PORTUGUESE_NAME);
     }
 
     @Override

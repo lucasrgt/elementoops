@@ -1,6 +1,5 @@
 package creature;
 
-import console.ConsoleColors;
 import creature.characteristics.Characteristics;
 import element.Air;
 import element.Element;
@@ -17,9 +16,9 @@ public class AirCreature extends Creature {
     public void showCreatedCreatureMessage() {
         System.out.println(
                 "\n" +
-                "| Um " + ELEMENT.getConsoleColorCode() +  NAME + ConsoleColors.RESET + " nasce de uma brisa suave com as seguintes características:"
+                "| Um " +  NAME + " nasce de uma brisa suave com as seguintes características:"
         );
-        super.getCreatedCreatureCharacteristics();
+        super.getCreatedCreatureCharacteristicsMessage();
     }
 
     @Override

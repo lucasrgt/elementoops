@@ -1,6 +1,5 @@
 package creature;
 
-import console.ConsoleColors;
 import creature.characteristics.Characteristics;
 import element.Element;
 import element.Fire;
@@ -18,9 +17,9 @@ public class FireCreature extends Creature {
     public void showCreatedCreatureMessage() {
         System.out.println(
                 "\n" +
-                "| Um " + ELEMENT.getConsoleColorCode() +  NAME + ConsoleColors.RESET + " irrompe em uma explosão vulcânica com as seguintes características:"
+                "| Um " +  NAME +  " irrompe em uma explosão vulcânica com as seguintes características:"
         );
-        super.getCreatedCreatureCharacteristics();
+        super.getCreatedCreatureCharacteristicsMessage();
     }
 
     @Override

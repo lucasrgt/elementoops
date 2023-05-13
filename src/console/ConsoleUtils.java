@@ -22,9 +22,9 @@ public class ConsoleUtils {
      * Mostra o menu de saída do jogo com confirmação se o jogador deseja realmente sair.
      */
     public static void stop(Scanner scanner) {
-        System.out.println("\nVocê deseja mesmo sair do jogo?");
-        System.out.println("\n| " +  ConsoleColors.GREEN + "1. Continuar jogo" + ConsoleColors.RESET +
-                           "\n| " + ConsoleColors.RED + "2. Sair" + ConsoleColors.RESET);
+        System.out.println("Você deseja mesmo sair do jogo?" + "\n");
+        System.out.println("| " + "1. Continuar jogo" + "\n" +
+                           "| " + "2. Sair");
 
         System.out.print("\n- SELECIONE UMA OPÇÃO ( 1 - 2 ): ");
 
@@ -37,7 +37,7 @@ public class ConsoleUtils {
                 System.exit(0);
             }
             default ->
-                    System.out.println(ConsoleColors.RED + "\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 3.\n" + ConsoleColors.RESET);
+                    System.out.println("\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 3.\n");
         }
         }
     }

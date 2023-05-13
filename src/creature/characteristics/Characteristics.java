@@ -5,12 +5,12 @@ package creature.characteristics;
  * Características de uma criatura
  */
 public class Characteristics {
-    private int power;
-    private int damage;
-    private int defense;
-    private int speed;
+    private final int power;
+    private final int damage;
+    private final int defense;
+    private final int speed;
     private int vitality;
-    private int initialVitality;
+    private final int initialVitality;
 
     public Characteristics() {
         this.power = CharacteristicRandomizer.getRandomCharacteristicNumber(10, 30);

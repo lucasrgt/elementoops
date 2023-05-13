@@ -1,16 +1,14 @@
 package console;
 
 import creature.*;
-import element.Air;
-import element.Earth;
-import element.Fire;
-import element.Water;
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class ConsoleCreatureHandler {
-    /** Cria uma nova criatura e mostra a mensagem contendo as suas características.
-     * @return Creature
+    /**
+     * Cria uma nova criatura e mostra a mensagem contendo as suas características.
+     *
      */
 
     Scanner scanner;
@@ -18,25 +16,28 @@ public class ConsoleCreatureHandler {
     public ConsoleCreatureHandler(Scanner scanner) {
         this.scanner = scanner;
     }
+
     public Creature createCreature() {
         Creature playerCreature = selectCreature();
 
-        System.out.println("\n[ " + ConsoleColors.GREEN + "SUCESSO" + ConsoleColors.RESET + " ] " +  "CRIATURA SELECIONADA!");
+        System.out.println("\n[ " + "SUCESSO" + " ] " + "CRIATURA SELECIONADA!");
 
         playerCreature.showCreatedCreatureMessage();
 
         return playerCreature;
     }
 
-    /** Retorna uma nova instância da criatura escolhida pelo jogador. Essa instância é única e será utilizada no jogo inteiro.
+    /**
+     * Retorna uma nova instância da criatura escolhida pelo jogador. Essa instância é única e será utilizada no jogo inteiro.
+     *
      * @return Creature
      */
     private Creature selectCreature() {
         while (true) {
-            System.out.println("| " + Air.CONSOLE_COLOR_CODE + "1. Ar" + ConsoleColors.RESET);
-            System.out.println("| " + Earth.CONSOLE_COLOR_CODE + "2. Terra" + ConsoleColors.RESET);
-            System.out.println("| " + Fire.CONSOLE_COLOR_CODE + "3. Fogo" + ConsoleColors.RESET);
-            System.out.println("| " + Water.CONSOLE_COLOR_CODE + "4. Água" + ConsoleColors.RESET);
+            System.out.println("| " + "1. Ar");
+            System.out.println("| " + "2. Terra");
+            System.out.println("| " + "3. Fogo");
+            System.out.println("| " + "4. Água");
             System.out.print("\n- SELECIONE A SUA CRIATURA ( 1 - 4 ): ");
 
             int choice = scanner.nextInt();
@@ -54,8 +55,7 @@ public class ConsoleCreatureHandler {
                 case 4 -> {
                     return new WaterCreature();
                 }
-                default ->
-                        System.out.println(ConsoleColors.RED + "\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 4.\n" + ConsoleColors.RESET);
+                default -> System.out.println("\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 4.\n");
             }
         }
     }
@@ -66,12 +66,12 @@ public class ConsoleCreatureHandler {
      */
     public Creature getFirstAttack(Creature playerSelectedCreature, Creature enemyCreature) {
         if (playerSelectedCreature.getCharacteristics().getSpeed() > enemyCreature.getCharacteristics().getSpeed()) {
-            System.out.println("[ " + ConsoleColors.GREEN + "COMBATE" + ConsoleColors.RESET + " ] " + "SUA CRIATURA É MAIS RÁPIDA, VOCÊ JOGA PRIMEIRO!\n");
+            System.out.println("[ " + "COMBATE" + " ] " + "SUA CRIATURA É MAIS RÁPIDA, VOCÊ JOGA PRIMEIRO!\n");
             selectAttack(playerSelectedCreature, enemyCreature);
 
             return playerSelectedCreature;
         } else {
-            System.out.println("[ " + ConsoleColors.RED + "COMBATE" + ConsoleColors.RESET + " ] " + "INFELIZMENTE A CRIATURA INIMIGA É MAIS RÁPIDA, ELA JOGA PRIMEIRO!\n");
+            System.out.println("[ " + "COMBATE" + " ] " + "INFELIZMENTE A CRIATURA INIMIGA É MAIS RÁPIDA, ELA JOGA PRIMEIRO!\n");
             enemyAttack(playerSelectedCreature, enemyCreature);
 
             return enemyCreature;
@@ -87,27 +87,26 @@ public class ConsoleCreatureHandler {
         boolean attackSelected = false;
 
         while (!attackSelected) {
-            System.out.println("| " + ConsoleColors.YELLOW + "1. Ataque FÍSICO" + ConsoleColors.RESET);
-            System.out.println("| " + ConsoleColors.PURPLE + "2. Ataque ELEMENTAL" + ConsoleColors.RESET);
-            System.out.println("| " + ConsoleColors.RED + "3. Sair" + ConsoleColors.RESET);
+            System.out.println("| " + "1. Ataque FÍSICO");
+            System.out.println("| " + "2. Ataque ELEMENTAL");
+            System.out.println("| " + "3. Sair");
             System.out.print("\n- SELECIONE UMA OPÇÃO ( 1 - 3 ):  ");
 
             int choice = scanner.nextInt();
 
             switch (choice) {
                 case 1 -> {
-                    System.out.println(ConsoleColors.GREEN + "\nVOCÊ REALIZA UM ATAQUE FÍSICO!" + ConsoleColors.RESET);
+                    System.out.println("\nVOCÊ REALIZA UM ATAQUE FÍSICO!");
                     enemyCreature.receivePhysicalDamage(playerCreature);
                     attackSelected = true;
                 }
                 case 2 -> {
-                    System.out.println(ConsoleColors.GREEN + "\nVOCÊ REALIZA UM ATAQUE ELEMENTAL!" + ConsoleColors.RESET);
+                    System.out.println("\nVOCÊ REALIZA UM ATAQUE ELEMENTAL!");
                     enemyCreature.receiveElementalDamage(playerCreature);
                     attackSelected = true;
                 }
                 case 3 -> ConsoleUtils.stop(scanner);
-                default ->
-                        System.out.println(ConsoleColors.RED + "\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 3.\n" + ConsoleColors.RESET);
+                default -> System.out.println("\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 3.\n");
             }
         }
     }
@@ -127,7 +126,7 @@ public class ConsoleCreatureHandler {
 
         Random random = new Random();
 
-        System.out.println(ConsoleColors.RED + "\n\nO INIMIGO LANÇA UM ATAQUE!" + ConsoleColors.RESET);
+        System.out.println("\n\nO INIMIGO LANÇA UM ATAQUE!");
 
         int chance = random.nextInt(2) + 1;
 
@@ -137,6 +136,6 @@ public class ConsoleCreatureHandler {
             playerCreature.receivePhysicalDamage(enemyCreature);
         }
 
-        System.out.println(ConsoleColors.RED + "SUA VIDA AGORA: " + playerCreature.getCharacteristics().getVitality() + "\n" + ConsoleColors.RESET);
+        System.out.println("SUA VIDA AGORA: " + playerCreature.getCharacteristics().getVitality() + "\n");
     }
 }

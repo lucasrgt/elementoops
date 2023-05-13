@@ -23,7 +23,7 @@ public class ConsoleTournament {
 
             Characteristics enemyCreatureCharacteristics = enemyCreature.getCharacteristics();
 
-            System.out.println("[ " + ConsoleColors.RED + "ALERTA" + ConsoleColors.RESET + " ] " +  "INIMIGO AVISTADO!");
+            System.out.println("[ " +  "ALERTA"  + " ] " +  "INIMIGO AVISTADO!");
 
             enemyCreature.showCreatedCreatureMessage();
 
@@ -33,10 +33,10 @@ public class ConsoleTournament {
                 if (lastAttacker != playerSelectedCreature) {
                     creatureHandler.selectAttack(playerSelectedCreature, enemyCreature);
 
-                    System.out.println(ConsoleColors.RED + "VIDA DO INIMIGO AGORA: " + enemyCreatureCharacteristics.getVitality() + "\n" + ConsoleColors.RESET);
+                    System.out.println("VIDA DO INIMIGO AGORA: " + enemyCreatureCharacteristics.getVitality() + "\n");
 
                     if (enemyCreatureCharacteristics.getVitality() <= 0) {
-                        System.out.println(ConsoleColors.GREEN + "VOCÊ DERROTOU O INIMIGO!\n" + ConsoleColors.RESET);
+                        System.out.println("VOCÊ DERROTOU O INIMIGO!\n");
                         playerSelectedCreature.regenerateVitality();
                         ConsoleUtils.sleep(3000);
                         break;
@@ -47,7 +47,7 @@ public class ConsoleTournament {
                     creatureHandler.enemyAttack(playerSelectedCreature, enemyCreature);
 
                     if (playerSelectedCreatureCharacteristics.getVitality() <= 0) {
-                        System.out.println(ConsoleColors.RED + "--- GAME OVER - VOCÊ FOI DERROTADO ---");
+                        System.out.println("--- GAME OVER - VOCÊ FOI DERROTADO ---");
                         System.exit(0);
                     }
 
@@ -56,6 +56,6 @@ public class ConsoleTournament {
             }
         }
 
-        System.out.println(ConsoleColors.GREEN + "\n --- PARABÉNS, VOCÊ VENCEU O JOGO! ---");
+        System.out.println("\n --- PARABÉNS, VOCÊ VENCEU O JOGO! ---");
     }
 }
