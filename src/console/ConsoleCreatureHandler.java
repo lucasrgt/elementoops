@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class ConsoleCreatureHandler {
     /**
      * Cria uma nova criatura e mostra a mensagem contendo as suas características.
-     *
      */
 
     Scanner scanner;
@@ -62,7 +61,8 @@ public class ConsoleCreatureHandler {
 
     /**
      * Implementação da lógica de quem começa a jogar primeiro (jogador ou computador) baseado na velocidade das criaturas.
-     * A criatura com mais velocidade será aquela que jogará primeiro.
+     * A criatura com mais velocidade será aquela que jogará primeiro. Se as criaturas tiverem a mesma velocidade, irá ser sorteado
+     * quem irá jogar primeiro (50/50).
      */
     public Creature getFirstAttack(Creature playerSelectedCreature, Creature enemyCreature) {
         if (playerSelectedCreature.getCharacteristics().getSpeed() > enemyCreature.getCharacteristics().getSpeed()) {
@@ -70,6 +70,25 @@ public class ConsoleCreatureHandler {
             selectAttack(playerSelectedCreature, enemyCreature);
 
             return playerSelectedCreature;
+        } else if (playerSelectedCreature.getCharacteristics().getSpeed() == enemyCreature.getCharacteristics().getSpeed()) {
+            System.out.println("[ COMBATE ] VELOCIDADES DAS CRIATURAS SÃO IGUAIS, VAMOS SORTEAR QUEM IRÁ JOGAR PRIMEIRO! ");
+            Random random = new Random();
+
+            System.out.println("\n\nO INIMIGO LANÇA UM ATAQUE!");
+
+            int chance = random.nextInt(2) + 1;
+
+            if (chance == 1) {
+                System.out.println("[ COMBATE ] SUA CRIATURA FOI SORTEADA PARA JOGAR PRIMEIRO.");
+                selectAttack(playerSelectedCreature, enemyCreature);
+                return playerSelectedCreature;
+
+            } else {
+                System.out.println("[ COMBATE ] INFELIZMENTE O INIMIGO FOI SORTEADO PARA JOGAR PRIMEIRO.");
+                enemyAttack(playerSelectedCreature, enemyCreature);
+                return enemyCreature;
+            }
+
         } else {
             System.out.println("[ " + "COMBATE" + " ] " + "INFELIZMENTE A CRIATURA INIMIGA É MAIS RÁPIDA, ELA JOGA PRIMEIRO!\n");
             enemyAttack(playerSelectedCreature, enemyCreature);
@@ -97,12 +116,12 @@ public class ConsoleCreatureHandler {
             switch (choice) {
                 case 1 -> {
                     System.out.println("\nVOCÊ REALIZA UM ATAQUE FÍSICO!");
-                    enemyCreature.receivePhysicalDamage(playerCreature);
+                    playerCreature.castPhysicalAttack(enemyCreature);
                     attackSelected = true;
                 }
                 case 2 -> {
                     System.out.println("\nVOCÊ REALIZA UM ATAQUE ELEMENTAL!");
-                    enemyCreature.receiveElementalDamage(playerCreature);
+                    playerCreature.castElementalAttack(enemyCreature);
                     attackSelected = true;
                 }
                 case 3 -> ConsoleUtils.stop(scanner);
@@ -131,9 +150,9 @@ public class ConsoleCreatureHandler {
         int chance = random.nextInt(2) + 1;
 
         if (chance == 1) {
-            playerCreature.receiveElementalDamage(enemyCreature);
+            enemyCreature.castPhysicalAttack(playerCreature);
         } else {
-            playerCreature.receivePhysicalDamage(enemyCreature);
+            enemyCreature.castElementalAttack(playerCreature);
         }
 
         System.out.println("SUA VIDA AGORA: " + playerCreature.getCharacteristics().getVitality() + "\n");

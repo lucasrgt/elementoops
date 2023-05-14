@@ -1,5 +1,7 @@
 package console;
+
 import creature.*;
+
 import java.util.Scanner;
 
 /**
@@ -26,7 +28,7 @@ public class GameConsole {
 
             System.out.println("""
                     Você deseja iniciar um torneio?
-                    
+                                        
                     | 1. Iniciar torneio
                     | 2. Sair""");
 
@@ -47,8 +49,7 @@ public class GameConsole {
                         selected = true;
                         restartGame = true;
                     }
-                    default ->
-                            System.out.println("\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 3.\n");
+                    default -> System.out.println("\nESCOLHA INVÁLIDA. POR FAVOR SELECIONE UM NÚMERO DE 1 - 2.\n");
                 }
             }
         } while (restartGame);

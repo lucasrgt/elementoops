@@ -8,8 +8,8 @@ public class Air extends Element {
     }
 
     @Override
-    public double getResistanceFactor(Element element) {
-        return switch (element.getName()) {
+    public double getResistanceFactor(Element enemyElement) {
+        return switch (enemyElement.getName()) {
             case "Fire" -> 2.0;
             case "Water", "Earth" -> 1.0;
             case "Air" -> 0.5;

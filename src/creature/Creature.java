@@ -1,7 +1,5 @@
 package creature;
 
-import creature.attack.ElementalAttack;
-import creature.attack.PhysicalAttack;
 import creature.characteristics.Characteristics;
 import element.Element;
 
@@ -11,7 +9,7 @@ import element.Element;
 public abstract class Creature {
     private final String name;
     private final Element element;
-    private Characteristics characteristics;
+    private final Characteristics characteristics;
 
     public Creature(String name, Element element, Characteristics characteristics) {
         this.name = name;
@@ -26,6 +24,7 @@ public abstract class Creature {
 
     /**
      * Retorna uma lista de criaturas inimigas para combater baseado no elemento da criatura do jogador.
+     *
      * @return Creature[]
      */
     public abstract Creature[] getEnemiesCreatures();
@@ -35,60 +34,62 @@ public abstract class Creature {
      */
     protected void getCreatedCreatureCharacteristicsMessage() {
         System.out.println(
-        "| PODER (PDR): " + this.characteristics.getPower() +
-        "\n" +
-        "| ATAQUE (ATQ): " + this.characteristics.getDamage() +
-        "\n" +
-        "| DEFESA (DEF): " + this.characteristics.getDefense() +
-        "\n" +
-        "| VELOCIDADE (VEL): " + this.characteristics.getSpeed() +
-        "\n" +
-        "| PONTOS DE VIDA (PVD): " + this.characteristics.getVitality() +
-        "\n"
+                "| PODER (PDR): " + this.characteristics.getPower() +
+                        "\n" +
+                        "| ATAQUE (ATQ): " + this.characteristics.getDamage() +
+                        "\n" +
+                        "| DEFESA (DEF): " + this.characteristics.getDefense() +
+                        "\n" +
+                        "| VELOCIDADE (VEL): " + this.characteristics.getSpeed() +
+                        "\n" +
+                        "| PONTOS DE VIDA (PVD): " + this.characteristics.getVitality() +
+                        "\n"
         );
     }
 
     /**
-     * Recebe um ataque físico e reduz a vitalidade.
+     * Conjuração de um ataque físico.
      */
-    public void receivePhysicalDamage(Creature enemyCreature) {
-        int enemyAttackDamage = new PhysicalAttack(enemyCreature.getCharacteristics()).castAttack();
+    public void castPhysicalAttack(Creature enemyCreature) {
+        int damage = this.characteristics.getDamage() * this.characteristics.getPower();
 
         System.out.println("\n" +
-                "| " + enemyCreature.getName() + " REALIZA UM ATAQUE FÍSICO!\n" +
-                "| " + "Dano bruto: " + enemyAttackDamage + " ( PDR x ATQ )" +
+                "| " + getName() + " REALIZA UM ATAQUE FÍSICO!\n" +
+                "| " + "Dano bruto: " + damage + " ( PDR x ATQ )" +
                 "\n");
 
-        int receivedDamage = enemyAttackDamage / this.characteristics.getDefense();
+        int totalDamage = damage / enemyCreature.characteristics.getDefense();
 
-        System.out.println("DANO TOTAL DO ATAQUE: " + receivedDamage + "\n");
+        System.out.println("DANO TOTAL DO ATAQUE: " + totalDamage + "\n");
 
-        this.characteristics.setVitality(this.characteristics.getVitality() - receivedDamage);
+        enemyCreature.getCharacteristics().setVitality(enemyCreature.characteristics.getVitality() - totalDamage);
+
     }
 
     /**
-     * Recebimento de um ataque elemental e reduz a vitalidade da criatura com defesa baseada no fator elemental.
+     * Conjuração de um ataque elemental baseado no fator de defesa elemental.
      */
-    public void receiveElementalDamage(Creature enemyCreature) {
-        Element enemyElement = enemyCreature.getElement();
 
-        int enemyAttackDamage = new ElementalAttack(enemyCreature.getCharacteristics()).castAttack();
+    public void castElementalAttack(Creature enemyCreature) {
+        int damage = this.characteristics.getDamage() * this.characteristics.getPower();
 
         System.out.println("\n" +
-                "| " + enemyCreature.getName() + " REALIZA UM ATAQUE ELEMENTAL!\n" +
-                "| " + "Elemento: " + enemyElement.getPortugueseName() +
+                "| " + getName() + " REALIZA UM ATAQUE ELEMENTAL!\n" +
+                "| " + "Elemento: " + getElement().getPortugueseName() +
                 "\n" +
-                "| " + "Dano bruto: " + enemyAttackDamage + " ( PDR x ATQ )" +
+                "| " + "Dano bruto: " + damage + " ( PDR x ATQ )" +
                 "\n" +
-                "| " + "Ataque defendido com fator: " + this.element.getResistanceFactor(enemyElement) + " ( " + this.element.getPortugueseName() + " )" +
+                "| " + "Ataque defendido com fator: " + enemyCreature.element.getResistanceFactor(this.getElement()) +
+                " ( " + this.element.getPortugueseName() + " )" +
                 "\n");
 
-        int receivedDamage = (int) Math.round(enemyAttackDamage / (this.characteristics.getDefense() * this.element.getResistanceFactor(enemyElement)));
+        int totalDamage = (int) Math.round(damage / (enemyCreature.characteristics.getDefense() * enemyCreature.element.getResistanceFactor(this.getElement())));
 
-        System.out.println("DANO TOTAL RECEBIDO: " + receivedDamage + "\n");
+        System.out.println("DANO TOTAL DO ATAQUE: " + totalDamage + "\n");
 
-        this.characteristics.setVitality(this.characteristics.getVitality() - receivedDamage);
+        enemyCreature.getCharacteristics().setVitality(enemyCreature.characteristics.getVitality() - totalDamage);
     }
+
 
     /**
      * Regenera a vida da criatura ao valor inicial.
@@ -110,10 +111,4 @@ public abstract class Creature {
     public Characteristics getCharacteristics() {
         return characteristics;
     }
-
-    public void setCharacteristics(Characteristics characteristics) {
-        this.characteristics = characteristics;
-    }
-
-
 }

@@ -23,7 +23,7 @@ public class ConsoleTournament {
 
             Characteristics enemyCreatureCharacteristics = enemyCreature.getCharacteristics();
 
-            System.out.println("[ " +  "ALERTA"  + " ] " +  "INIMIGO AVISTADO!");
+            System.out.println("[ " + "ALERTA" + " ] " + "INIMIGO AVISTADO!");
 
             enemyCreature.showCreatedCreatureMessage();
 
